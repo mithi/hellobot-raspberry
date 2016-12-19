@@ -6,7 +6,7 @@ responder.default()
 
 while True:
   sleep(3)
-  Responder.express("hello1")
+  responder.express("hello1")
   sleep(3)
-  Responder.express("hello2")
+  responder.express("hello2")
   sleep(3)
