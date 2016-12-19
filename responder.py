@@ -9,7 +9,7 @@ LOW_POWER_COMMAND = "xset dpms force off"
 
 class Responder:
   def __init__(self):
-    self.static_eye = DEFAULT_FRAME_COMMAND + DEFAULT_STATIC_PATH 
+    self.static_eye = DEFAULT_FRAME_COMMAND
     self.animate_key = START_ANIMATION_COMMAND + ANIMATION_PATH
     self.low_power = LOW_POWER_COMMAND
     self.remove_key = REMOVE_EYE_COMMAND
