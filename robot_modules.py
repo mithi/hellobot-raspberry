@@ -5,7 +5,7 @@ import os
 #RESPONDER CONFIGURATION
 DEFAULT_STATIC_PATH = "/home/pi/hellobot/images/default-eye.jpg"
 ANIMATION_PATH = "/home/pi/hellobot/videos/"
-START_ANIMATION_COMMAND = "omxplayer -o local --win 0,0,480,800 " # -o alsa
+START_ANIMATION_COMMAND = "omxplayer -o alsa --win 0,0,480,800 " # -o alsa
 DEFAULT_FRAME_COMMAND = "sudo fbi -T 1 -d /dev/fb0 -a -noverbose /home/pi/hellobot/images/default-eye.jpg &" # remove sudo if necessary
 REMOVE_EYE_COMMAND = "sudo killall -3 fbi"
 LOW_POWER_COMMAND = "xset dpms force off"
@@ -89,8 +89,8 @@ def get_response(phrase):
     key = "name" + str(random.randint(1, 4))
   elif "do you do" in phrase: #what do you do?
     key = "do" + str(random.randint(1, 4))
-  elif "office" in phrase: #is anyone in the office?
-    key = "" + str(random.randint()) #FIX ME
+  elif "office" in phrase: #is anyone in te office?
+    key = "office1.mp4" #FIX ME
   elif "plans" in phrase or "tonight" in phrase: #what are your plans tonight?
     key = "plans" + str(random.randint(1, 5))
   elif "bathroom" in phrase: #where is the bathroom?
