@@ -1,4 +1,3 @@
-
 from gpiozero import MotionSensor
 from robot_modules import Responder, Listener
 from time import sleep
@@ -24,4 +23,5 @@ for _ in range(200):
       print listener.hear()
   
   responder.sleep() 
+
 
