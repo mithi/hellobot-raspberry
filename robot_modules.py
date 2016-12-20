@@ -57,9 +57,9 @@ class Listener:
     try:
       phrase = self.r.recognize_google(audio)
     except sr.UnknownValueError:
-      pass #print "GIBBERISH"
+      print "RECOGNIZED: GIBBERISH"
     except sr.RequestError as e:
-      pass #print("REQUEST ERROR: {0}".format(e))
+      print("RECOGNIZED: REQUEST ERROR: {0}".format(e))
 
     return phrase
 
@@ -81,7 +81,11 @@ class Directive:
       # NOTE: using trigger word consecutively before command will not be detected
       all_words = phrase.split()
       command_index = all_words.index(self.trigger) + 1
-      command = all_words[command_index]
+      try:
+        command = all_words[command_index]
+      except IndexError:
+        print "exception raised, index error?"
+        command = None
       print "Command extracted: ", command
     
     return command 
@@ -99,7 +103,7 @@ def get_response(phrase):
   elif "do you do" in phrase: #what do you do?
     key = "do" + str(random.randint(1, 4))
   elif "office" in phrase: #is anyone in te office?
-    key = "office1" #FIX ME
+    key = "office1"
   elif "plans" in phrase or "tonight" in phrase: #what are your plans tonight?
     key = "plans" + str(random.randint(1, 5))
   elif "bathroom" in phrase: #where is the bathroom?

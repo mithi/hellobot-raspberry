@@ -15,7 +15,7 @@ class Relayer:
       "forward": 'F',
       "left": 'L',
       "right": 'R',
-      "reverse": 'B',
+      "backward": 'B',
       "smart forward": 'S'
     }
   
