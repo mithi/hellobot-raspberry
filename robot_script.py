@@ -5,7 +5,7 @@ from relayer import Relayer
 
 COUNTS = 10000
 TRIGGER_WORD = "super"
-PIR_PIN = 40
+PIR_PIN = 26
 
 pir = MotionSensor(PIR_PIN)
 listener = Listener()      # listens to microphone and outputs text
@@ -25,7 +25,7 @@ def smart_move(key):
 
 def obey(key):
   if key in ['forward', 'reverse', 'left', 'right']: smart_move(key)
-  if key == 'death' = responder.shutdown()  
+  if key == 'death': responder.shutdown()  
 
 def listen():
 
@@ -41,6 +41,14 @@ def reply(phrase):
                                   # based on whether the given phrase contains a specific keyword 
   responder.show(response)        # plays the corresponding video given the video title 
 
+def interact():
+
+  phrase = listen()
+  if not phrase: continue
+
+  key = directive.command(phrase)
+  obey(key) if key else reply(phrase)
+
 ###########################################################################################################
 
 responder.default()               #shows default eye image on screen
@@ -48,10 +56,11 @@ responder.black()
 
 while True:
 
-  if pir.motion_detected(): responder.greet()
+  if pir.motion_detected: 
+    responder.greet()
 
-  phrase = listen()
-  if not phrase: continue
+    while pir.motion_detected:
+      interact()
+  
+  
 
-  key = directive.command(phrase)
-  obey(key) if key else reply(phrase)

@@ -90,7 +90,7 @@ def get_response(phrase):
   elif "do you do" in phrase: #what do you do?
     key = "do" + str(random.randint(1, 4))
   elif "office" in phrase: #is anyone in te office?
-    key = "office1.mp4" #FIX ME
+    key = "office1" #FIX ME
   elif "plans" in phrase or "tonight" in phrase: #what are your plans tonight?
     key = "plans" + str(random.randint(1, 5))
   elif "bathroom" in phrase: #where is the bathroom?
