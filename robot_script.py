@@ -2,6 +2,7 @@ from gpiozero import MotionSensor
 from robot_modules import Listener, Responder, Directive, get_response
 from face_finder import FaceFinder
 from relayer import Relayer
+from time import sleep 
 
 COUNTS = 10000
 TRIGGER_WORD = "super"
@@ -11,12 +12,13 @@ pir = MotionSensor(PIR_PIN)
 listener = Listener()      # listens to microphone and outputs text
 responder = Responder()    # plays video on screen 
 relayer = Relayer()        # communicates to arduino
+directive = Directive(TRIGGER_WORD)
+face_finder = FaceFinder()
 
 def smart_move(key):
 
   relayer.command(key) 
-  face_finder = FaceFinder()
-  
+ 
   for _ in range(0, COUNTS):
     if face_finder.face_detected(): relayer.command("move arms")
     face_finder.show(update = False)
@@ -25,7 +27,17 @@ def smart_move(key):
 
 def obey(key):
   if key in ['forward', 'reverse', 'left', 'right']: smart_move(key)
-  if key == 'death': responder.shutdown()  
+  if key == 'death': responder.shutdown()
+  if key == 'camera': robot_camera()
+
+def robot_camera():
+
+  COUNT = 1000
+
+  for _ in range(COUNT):
+    face_finder.show()
+  
+  face_finder.shutdown()
 
 def listen():
 
@@ -44,23 +56,30 @@ def reply(phrase):
 def interact():
 
   phrase = listen()
-  if not phrase: continue
+  if phrase:
+    key = directive.command(phrase)
+    obey(key) if key else reply(phrase)
 
-  key = directive.command(phrase)
-  obey(key) if key else reply(phrase)
+def greet():
+  relayer.signal("move arms")
+  responder.default()
+  responder.wake()
+  responder.greet()
 
 ###########################################################################################################
 
 responder.default()               #shows default eye image on screen
-responder.black()
+relayer.connect()                 #connect to arduino port
+face_finder.shutdown()
 
 while True:
+  
+  if pir.motion_detected:
 
-  if pir.motion_detected: 
-    responder.greet()
+    greet()
 
     while pir.motion_detected:
       interact()
-  
-  
+
+  responder.sleep()  
 

@@ -72,6 +72,9 @@ class Directive:
     return self.trigger in phrase
 
   def command(self, phrase):
+
+    print "in directive=>phrase:", phrase
+
     command = None
 
     if self.check(phrase):
@@ -79,6 +82,7 @@ class Directive:
       all_words = phrase.split()
       command_index = all_words.index(self.trigger) + 1
       command = all_words[command_index]
+      print "Command extracted: ", command
     
     return command 
 
