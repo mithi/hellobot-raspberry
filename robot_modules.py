@@ -8,8 +8,10 @@ ANIMATION_PATH = "/home/pi/hellobot/videos/"
 START_ANIMATION_COMMAND = "omxplayer -o alsa --win 0,0,480,800 " # -o alsa
 DEFAULT_FRAME_COMMAND = "sudo fbi -T 1 -d /dev/fb0 -a -noverbose /home/pi/hellobot/images/default-eye.jpg &" # remove sudo if necessary
 REMOVE_EYE_COMMAND = "sudo killall -3 fbi"
-LOW_POWER_COMMAND = "xset dpms force off"
+LOW_POWER_COMMAND = "xset dpms force off" #does not work via ssh
 SHUTDOWN = "sudo shutdown -h now"
+DISPLAY_OFF = 'sudo bash -c "echo 1 > /sys/class/backlight/rpi_backlight/bl_power"'
+DISPLAY_ON = 'sudo bash -c "echo 0 > /sys/class/backlight/rpi_backlight/bl_power"'
 
 class Responder:
 
@@ -25,9 +27,12 @@ class Responder:
   def default(self):
     os.system(DEFAULT_FRAME_COMMAND)
 
-  def black(self):
-    os.system(LOW_POWER_COMMAND)
+  def sleep(self):
+    os.system(DISPLAY_OFF)
   
+  def wake(self):
+    os.system(DISPLAY_ON)
+
   def remove(self):
     os.system(REMOVE_EYE_COMMAND)
 

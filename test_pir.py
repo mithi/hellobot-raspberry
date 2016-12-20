@@ -10,11 +10,18 @@ listener = Listener()
 
 responder.default()
 
-while True:
+for _ in range(200):
 
-  if pir.motion_detected: 
+  if pir.motion_detected:
+
+    responder.default()
+    sleep(0.01) 
+    responder.wake()
     responder.greet()
+    sleep(0.01)
+
     while pir.motion_detected:
       print listener.hear()
-
+  
+  responder.sleep() 
 
