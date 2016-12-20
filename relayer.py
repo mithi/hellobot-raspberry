@@ -15,7 +15,8 @@ class Relayer:
       "forward": 'F',
       "left": 'L',
       "right": 'R',
-      "reverse": 'B'
+      "reverse": 'B',
+      "smart forward": 'S'
     }
   
   def connect(self):

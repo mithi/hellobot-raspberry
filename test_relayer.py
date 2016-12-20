@@ -14,7 +14,7 @@ print "connected?", relayer.check_connection()
 
 while True:
 
-  x = raw_input("F B L R A H D X:")
+  x = raw_input("F B L R A H D S X:")
   
   if x == 'F':
     relayer.command("forward")
@@ -28,14 +28,17 @@ while True:
   if x == 'R':
     relayer.command("right")
 
-  if x == 'F':
+  if x == 'A':
     relayer.command("move arms")
 
-  if x == 'F':
+  if x == 'H':
     relayer.signal("listening")
 
-  if x == 'F':
+  if x == 'D':
     relayer.signal("message decoded")
+
+  if x == 'S':
+    relayer.signal("smart forward")
 
   if x == 'X':
     break
