@@ -1,18 +1,21 @@
 from gpiozero import MotionSensor
-from robot_modules import Listener, Responder, Directive, get_response
+from robot_modules import Listener, Responder, Directive, get_response, camera_stop
 from face_finder import FaceFinder
 from relayer import Relayer
 from time import sleep 
+import os 
 
 COUNTS = 10000
-TRIGGER_WORD = "super"
+TRIGGER_WORD = "robot"
 PIR_PIN = 26
 
-pir = MotionSensor(PIR_PIN)
-listener = Listener()      # listens to microphone and outputs text
-responder = Responder()    # plays video on screen 
-relayer = Relayer()        # communicates to arduino
+#camera_stop()               #make sure to stop resources using camera
+
+listener = Listener()       # listens to microphone and outputs text
+responder = Responder()     # plays video on screen 
+relayer = Relayer()         # communicates to arduino
 directive = Directive(TRIGGER_WORD)
+pir = MotionSensor(PIR_PIN)
 face_finder = FaceFinder()
 
 def move(key):
@@ -70,9 +73,14 @@ while True:
   if pir.motion_detected:
 
     greet()
+    print "person detected for the first time"
 
     while pir.motion_detected:
       interact()
+      print "person still detected"
 
-  responder.sleep()  
+  responder.sleep()
+  print "no person detected"
+
+camera_stop()
 

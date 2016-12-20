@@ -1,6 +1,7 @@
 import speech_recognition as sr
 import random 
 import os
+from time import sleep
 
 #RESPONDER CONFIGURATION
 DEFAULT_STATIC_PATH = "/home/pi/hellobot/images/default-eye.jpg"
@@ -115,4 +116,10 @@ def get_response(phrase):
     key = "catch" + str(random.randint(1, 2))
 
   return key
-  
+ 
+def camera_stop():
+
+  CAMERA_START_SCRIPT = "sudo /home/pi/RPi_Cam_Web_Interface/start.sh"
+  CAMERA_STOP_SCRIPT = "sudo /home/pi/RPi_Cam_Web_Interface/stop.sh"
+  os.system(CAMERA_STOP_SCRIPT)
+  sleep(2) 
