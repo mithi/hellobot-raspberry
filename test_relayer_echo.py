@@ -15,23 +15,23 @@ print "connected?", relayer.check_connection()
 #signal and command are the same in routine, 
 #command means you are ordering something, signal means you are just informing
 relayer.signal("listening")
-sleep(3)
+raw_input("press any key to continue")
 
 relayer.signal("message decoded")
-sleep(3)
+raw_input("press any key to continue")
 
 relayer.command("move arms")
-sleep(3)
+raw_input("press any key to continue")
 
 relayer.command("reverse")
-sleep(3)
+raw_input("press any key to continue")
 
 relayer.command("forward")
-sleep(3)
+raw_input("press any key to continue")
 
 relayer.command("left")
-sleep(3)
+raw_input("press any key to continue")
 
 relayer.command("right")
-sleep(3)
+raw_input("press any key to continue")
 
