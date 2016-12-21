@@ -1,5 +1,6 @@
 from listener import Listener
 import os
+from time import sleep
 
 listener = Listener()
 
@@ -7,9 +8,9 @@ listener = Listener()
 PATH = "/home/pi/hellobot/videos/"
 START_COMMAND = "omxplayer -o local --win 0,0,480,800 /home/pi/hellobot/videos/"
 
-while True:
+os.system("sudo fbi -T 1 -d /dev/fb0 -a -noverbose -t 1 ./videos/cat.jpg &")
 
-  os.system("sudo fbi --noverbose -T 2 ./videos/cat.jpg &")
+while True:
     
   key = listener.hear()
 
@@ -17,15 +18,23 @@ while True:
     print key
 
     if "hello" in key or "hi" in key or "hey" in key:
-      os.system(START_COMMAND + "hello.mp4")
+      print "hello"
+      #os.system(START_COMMAND + "hello.mp4")
     elif "goodbye" in key:
-      os.system(START_COMMAND + "whatsup.mp4")
+      print "goodbye"
+      #os.system(START_COMMAND + "whatsup.mp4")
     elif "help" in key:
-      os.system(START_COMMAND + "help.mp4")
+      print "help"
+      #os.system(START_COMMAND + "help.mp4")
     elif "black" in key:
+      os.system("sudo killall -3 fbi")
       os.system("xset dpms force off") #turn off black light
+      sleep(5)
+      os.system("sudo fbi -T 1 -d /dev/fb0 -a -noverbose -t 1 ./videos/cat.jpg &")
     elif "shutdown" in key:
       os.system("sudo shutdown -h now")
+    elif "break" in key:
+      break
     
 
 

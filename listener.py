@@ -19,8 +19,10 @@ class Listener:
     try:
       phrase = self.r.recognize_google(audio)
     except sr.UnknownValueError:
-      print "GIBBERISH"
+      pass
+      #print "GIBBERISH"
     except sr.RequestError as e:
-      print("REQUEST ERROR: {0}".format(e))
+      pass
+      #print("REQUEST ERROR: {0}".format(e))
 
     return phrase
