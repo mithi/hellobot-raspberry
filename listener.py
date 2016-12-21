@@ -10,7 +10,7 @@ class Listener:
     return self.recognize(self.obtain_audio())
   
   def obtain_audio(self):
-    with sr.Microphone() as source:
+    with sr.Microphone(device_index = 0, sample_rate = 48000, chunk_size = 1024) as source:
       return self.r.listen(source)
   
   def recognize(self, audio):
