@@ -9,4 +9,3 @@ while True:
   responder.express("hello1")
   sleep(3)
   responder.express("hello2")
-  sleep(3)
