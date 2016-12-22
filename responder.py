@@ -2,8 +2,8 @@ import os
 
 DEFAULT_STATIC_PATH = "/home/pi/hellobot/images/default-eye.jpg"
 ANIMATION_PATH = "/home/pi/hellobot/videos/"
-START_ANIMATION_COMMAND = "omxplayer -o alsa --win 0,0,480,800 "
-DEFAULT_FRAME_COMMAND = "fbi -T 1 -d /dev/fb0 -a -noverbose /home/pi/hellobot/images/default-eye.jpg &"
+START_ANIMATION_COMMAND = "omxplayer -o local --win 0,0,480,800 "
+DEFAULT_FRAME_COMMAND = "sudo fbi -T 1 -d /dev/fb0 -a -noverbose /home/pi/hellobot/images/default-eye.jpg &"
 REMOVE_EYE_COMMAND = "killall -3 fbi"
 LOW_POWER_COMMAND = "xset dpms force off"
 
@@ -15,7 +15,7 @@ class Responder:
     self.remove_key = REMOVE_EYE_COMMAND
 
   def express(self, key):
-  	os.system(self.animate_key + key + ".mp4")
+    os.system(self.animate_key + key + ".mp4")
 
   def default(self):
         print self.static_eye
