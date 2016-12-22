@@ -1,7 +1,7 @@
 import random
 
-def get_response_key(phrase):  
-
+def get_response(phrase):  
+  
   if "hello" in phrase or "hey" in phrase or "hi" in phrase: #greet
     key = "hello" + str(random.randint(1, 6))
   elif "how are you" in phrase: #how are you?
