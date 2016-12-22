@@ -12,5 +12,5 @@ while True:
   phrase = listener.hear()
   
   if phrase:
-  	response = get_response(phrase)
+    response = get_response(phrase)
     responder.express(response)
