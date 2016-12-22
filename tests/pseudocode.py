@@ -99,8 +99,9 @@ while True:
 
   if not phrase: continue
   
-  if directive.check(phrase):
-    key = directive.command(phrase)
+  key = directive.command(phrase)
+  
+  if key:
     obey_mode(key)
   else: 
     reply(phrase)

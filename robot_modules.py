@@ -56,3 +56,19 @@ class Listener:
       #print("REQUEST ERROR: {0}".format(e))
 
     return phrase
+
+class Directive:
+  def __init__(trigger):
+    self.trigger = trigger
+
+  def check(self, phrase):
+    return self.trigger in phrase
+
+  def command(phrase):
+    if self.check(phrase):
+      all_words = phrase.split()
+      command_index = all_words.index(pass_phrase) + 1
+      command = all_words[command_index]
+      return command
+    else:
+      return None
