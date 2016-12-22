@@ -1,12 +1,12 @@
-from eye import Eye
+from responder import Responder
 from time import sleep
 
-eye = Eye()
-eye.default()
+responder = Responder()
+responder.default()
 
 while True:
-	sleep(3)
-	eye.express("Hellobot_Help", "001")
-	sleep(3)
-	eye.express("Hellobot_Help", "002")
-	sleep(3)
+  sleep(3)
+  Responder.express("Hellobot_Help""1")
+  sleep(3)
+  Responder.express("Hellobot_Help", "2")
+  sleep(3)

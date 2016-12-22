@@ -7,15 +7,15 @@ DEFAULT_FRAME_COMMAND = "sudo fbi -T 1 -d /dev/fb0 -a -noverbose home/pi/hellobo
 REMOVE_EYE_COMMAND = "sudo killall -3 fbi"
 LOW_POWER_COMMAND = "xset dpms force off"
 
-class Eye:
+class responder:
   def __init__(self):
     self.static_eye = DEFAULT_FRAME_COMMAND + DEFAULT_STATIC_PATH 
     self.animate_key = START_ANIMATION_COMMAND + ANIMATION_PATH
     self.low_power = LOW_POWER_COMMAND
     self.remove_key = REMOVE_EYE_COMMAND
 
-  def express(self, key, id):
-  	os.system(self.animate_key + key + id + ".mp4")
+  def express(self, key):
+  	os.system(self.animate_key + key + ".mp4")
 
   def default(self):
   	os.system(self.static_eye)
