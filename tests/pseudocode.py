@@ -5,6 +5,7 @@ from helper import get_response
 
 ##################################################################################
 
+COUNTS = 1000
 TRIGGER_WORD = "super"
 PIR_PIN = 40
 
@@ -17,106 +18,65 @@ relayer = Relayer()      # communicates commands to arduino, gets feedback from 
 
 ##################################################################################
 
-def obey_mode(key):
+def obey(key):
   
-  if key in ['forward', 'left', 'right']:
-    smart_move(key)
-  
-  if key == 'camera': 
-    smart_camera()
+  if key in ['forward', 'left', 'right']: smart_move(key)
+  if key == 'camera': smart_camera()
 
 def smart_camera():
 
-  COUNTS = 1000
-
   face_finder.start()
-  
-  relayer.signal()
 
   for _ in range(0, COUNTS):
+
     face_finder.run()
     face_finder.show()
     
-    relayer.signal("listening")
-    phrase = listener.hear()
-    relayer.signal("message decoded")
+    phrase = listen()
 
-    if "stop" in phrase:
-      break
     if "cheese" in phrase:
       face_finder.run()
-      face_finder.save()
+      face_finder.save() #post on twitter?
       break  
 
 def smart_move(key):
-  
-  relayer.signal("moving")
-  relayer.smart_move(key)
-  
+
+  relayer.command(key) 
   face_finder.start()
   
-  while True:
+  for _ in range(0, COUNTS):
 
     face_finder.run()
     face_finder.show()
 
-    if face_finder.has_faces()
-      responder.greet()
-      break
-
     if relayer.answer("obstacle?"):
-      relayer.signal("move arms")
-      responder.express("obstacle_detected")
+      responder.show("obstacle_detected")
       break
 
-    if relayer.answer("complete?")
-      relayer.signal("move arms")
-      responder.express("finished_directive")
-      break
-
-def reply(phrase):
-  
-  relayer.signal("move arms")
-  relayer.signal("talking")
-
-  response = get_response(phrase) # picks one of several appropriate responses (video title) based on keyword 
-                                  # based if keyword is contained on the given phrase 
-  responder.express(response)     # plays the corresponding video given the title of the video 
-
-##################################################################################
-
-responder.default()      #shows default eye image on screen
-
-while True:
-
-  if (pir.motion_detected())
-    relayer.signal("life detected")
-    responder.greet()
+def listen():
 
   relayer.signal("listening")
   phrase = listener.hear()
   relayer.signal("message decoded")
+  return phrase
 
-  if not phrase: continue
+def reply(phrase):
   
-  key = directive.command(phrase)
-  
-  if key:
-    obey_mode(key)
-  else: 
-    reply(phrase)
+  relayer.command("move arms")
+  response = get_response(phrase) # picks one of several appropriate responses (video title) based on whether keyword is contained on the given phrase 
+  responder.show(response)        # plays the corresponding video given the title of the video 
 
 ##################################################################################
 
-class Directive:
-  def __init__(trigger):
-    self.trigger = trigger
+responder.default()               #shows default eye image on screen
 
-  def check(self, phrase):
-    return self.trigger in phrase
+while True:
 
-  def command(phrase):
-    all_words = phrase.split()
-    command_index = all_words.index(pass_phrase) + 1
-    command = all_words[command_index]
-    return command
+  if pir.motion_detected(): responder.greet()
+
+  phrase = listen()
+  if not phrase: continue
+
+  key = directive.command(phrase)
+  obey(key) if key else reply(phrase)
+

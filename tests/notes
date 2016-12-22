@@ -1,0 +1,99 @@
+========================================================================================
+
+TOMORROW 
+- face_finder class with tests
+- simplified smart_camera function without relay but with listener
+- directive class with tests
+- directive class + simplified smart_camera + simplified reply function
+- Relayer class with Arduino "ECHO"
+- add neopixel to Arduino
+
+========================================================================================
+
+OFFICE
+- test stuff from home 
+- test PIR 
+- add NEOPIXEL
+- Arduino + Raspberry Pi communication with directives/commands
+- smart_move function
+- full pseudocode turned to real code
+- twitter functionality with filters
+
+========================================================================================
+
+ARDUINO
+- DISTANCE SENSOR CLASS (3)
+- PIXEL CLASS
+- MOTOR CLASS (4)
+- Servo (2)
+
+========================================================================================
+
+RELAYER 
+SIGNAL - 'listening', 'message decoded'
+COMMAND - 'move arms', 'forward', 'left', 'right'
+ANSWER - 'obstacle'
+
+========================================================================================
+
+ARDUINO 
+
+mode = FORWARD, LEFT, RIGHT, STATIONARY
+obstacle_detected_status = 0
+counter 
+threshold
+
+loop:
+
+  if serial.available()
+
+    message = serial.read()  
+    if message = listening: pixel animation 1
+    if message = message decoded: pixel animation 2
+    if message = move arms: move servos
+    if message = forward: mode = FORWARD
+    if message = left: mode = LEFT
+    if message = right: mode = RIGHT
+    if message = is_obstacle_detected: return answer based on obstacle_detected_status 
+
+    if message = forward or left or right
+      counter = 0
+      enable_distance_sensors()
+
+  if mode = not stationary
+    drive(mode) //forward, left or right
+    counter++ 
+    delay
+    obstacle_detected_status = left.obstacle_detected or center.obstacle_detected or right.obstacle detected
+
+  if obstacle_detected_status or counter > threshold: 
+    mode = stationary 
+    motor stop
+    counter = 0
+
+========================================================================================
+
+
+PSEUDOCODE
+
+detect motion -> if detected:greet  
+detect speaking -> if speaking 
+  - if it's a directive, obey
+  - if not, reply 
+
+obey 
+- if forward/left/right do smart_move
+- if camera do smart_camera
+
+smart camera
+- loop 1000 times 
+-- get camera frame, check if with faces, show camera frame with rectangle on face if any
+-- listen - if cheese take a picture, break (post on twitter???) 
+
+smart move
+-- signal Arduino to move
+-- loop 1000 times
+---- show camera frame with rectangle on people
+---- ask if obstactle if obstacle, break
+
+
