@@ -1,10 +1,10 @@
 from eye import Eye
 from time import sleep
 
-eye = eye()
+eye = Eye()
+eye.default()
 
 while True:
-	eye.default()
 	sleep(3)
 	eye.express("Hellobot_Help", "001")
 	sleep(3)
