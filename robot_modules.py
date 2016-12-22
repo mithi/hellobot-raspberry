@@ -2,6 +2,7 @@ import speech_recognition as sr
 import random 
 import os
 
+#RESPONDER CONFIG
 DEFAULT_STATIC_PATH = "/home/pi/hellobot/images/default-eye.jpg"
 ANIMATION_PATH = "/home/pi/hellobot/videos/"
 START_ANIMATION_COMMAND = "omxplayer -o local --win 0,0,480,800 " # -o alsa
@@ -10,6 +11,7 @@ REMOVE_EYE_COMMAND = "killall -3 fbi"
 LOW_POWER_COMMAND = "xset dpms force off"
 
 class Responder:
+
   def __init__(self):
     self.static_eye = DEFAULT_FRAME_COMMAND
     self.animate_key = START_ANIMATION_COMMAND + ANIMATION_PATH
