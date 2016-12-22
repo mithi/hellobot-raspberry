@@ -3,8 +3,6 @@ from robot_modules import Listener, Responder, Relayer, Directive
 from face_finder import FaceFinder
 from helper import get_response
 
-##################################################################################
-
 COUNTS = 1000
 TRIGGER_WORD = "super"
 PIR_PIN = 40
@@ -15,13 +13,6 @@ pir = MotionSensor(PIR_PIN)
 listener = Listener()    # listens to microphone and outputs text
 responder = Responder()  # plays video on screen 
 relayer = Relayer()      # communicates commands to arduino, gets feedback from arduino
-
-##################################################################################
-
-def obey(key):
-  
-  if key in ['forward', 'left', 'right']: smart_move(key)
-  if key == 'camera': smart_camera()
 
 def smart_camera():
 
@@ -53,6 +44,11 @@ def smart_move(key):
       responder.show("obstacle_detected")
       break
 
+def obey(key):
+  
+  if key in ['forward', 'left', 'right']: smart_move(key)
+  if key == 'camera': smart_camera()
+
 def listen():
 
   relayer.signal("listening")
@@ -63,8 +59,8 @@ def listen():
 def reply(phrase):
   
   relayer.command("move arms")
-  response = get_response(phrase) # picks one of several appropriate responses (video title) based on whether keyword is contained on the given phrase 
-  responder.show(response)        # plays the corresponding video given the title of the video 
+  response = get_response(phrase) # picks one of several appropriate responses (video title) based on whether the given phrase contains a specific keyword 
+  responder.show(response)        # plays the corresponding video given the video title  
 
 ##################################################################################
 
