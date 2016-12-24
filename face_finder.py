@@ -4,6 +4,8 @@ import cv2
 import numpy 
 import io 
 
+CASCADE_PATH = '/home/pi/hellobot/cascade/haarcascade_frontalface_default.xml'
+
 class FaceFinder:
 
   def __init__(self):
@@ -11,7 +13,7 @@ class FaceFinder:
     self.camera = PiCamera()
     self.camera.resolution = (320, 240)
     self.camera.framerate = 24
-    self.cascade = cv2.CascadeClassifier('/home/pi/robo/haarcascade_frontalface_default.xml') 
+    self.cascade = cv2.CascadeClassifier(CASCADE_PATH) 
     self.buff = None
     self.image = None
     self.gray = None
@@ -39,7 +41,8 @@ class FaceFinder:
     #put rectable on face
     for (x, y, w, h) in self.faces:
       cv2.rectangle(self.image,(x, y),(x + w, y + h),(255,255,0),2)
-
+    
+    #show picture
     cv2.imshow(self.image)
 
   def save(self):
