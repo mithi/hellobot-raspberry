@@ -35,7 +35,8 @@ class FaceFinder:
     self.faces = face_cascade.detectMultiScale(self.gray, 1.1, 5)
 
     print "found: " + str(len(self.faces)) + " face(s)"
-
+    
+    #put rectable on face
     for (x, y, w, h) in self.faces:
       cv2.rectangle(self.image,(x, y),(x + w, y + h),(255,255,0),2)
 
