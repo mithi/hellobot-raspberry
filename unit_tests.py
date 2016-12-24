@@ -35,25 +35,18 @@ def directive_test():
 
 def responder_test():
   responder = Responder()
-  
-  print "show default eye for three seconds.."
-  sleep(0.5)
-
-  responder.default()
-  sleep(3)
-
-  responder.remove()
-  print "remove image.."
-  sleep(0.5)
 
   print "low power mode for three seconds"
   sleep(0.5)
 
   responder.black()
-  sleep(3)
+  sleep(10)
 
   responder.default()
+  sleep(10)
+  responder.remove()
 
+  '''
   print "loop all videos"
   
   responder.show("advice1")
@@ -107,6 +100,7 @@ def responder_test():
   responder.show("up2")
   responder.show("up3")
   responder.show("up4")
+  '''
   print "test complete"
 
 def listener_test():
