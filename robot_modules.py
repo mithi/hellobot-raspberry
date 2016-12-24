@@ -57,7 +57,7 @@ class Listener:
 
 class Directive:
 
-  def __init__(trigger):
+  def __init__(self, trigger):
     self.trigger = trigger
 
   def check(self, phrase):
@@ -67,8 +67,9 @@ class Directive:
     command = None
 
     if self.check(phrase):
+      # NOTE: using trigger word consecutively before command will not be detected
       all_words = phrase.split()
-      command_index = all_words.index(pass_phrase) + 1
+      command_index = all_words.index(self.trigger) + 1
       command = all_words[command_index]
     
     return command 
