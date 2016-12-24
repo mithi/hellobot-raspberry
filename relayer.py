@@ -15,7 +15,6 @@ class Relayer:
       "forward": 'F',
       "left": 'L',
       "right": 'R',
-      "obstacle?": 'O',
     }
   
   def connect(self):
@@ -33,48 +32,15 @@ class Relayer:
     #command means your ordering something, signal you are just informing
     self.write(message)
 
-  def answer(self, question):
-    #answers are only true or false
-
-    answer = False
-
-    raw_answer = self.raw_answer(question)
-
-    if raw_answer == "T":
-      answer = True
-
-    return answer 
-  
-  def raw_answer(self, question):
-
-    #actual response from arduino 
-    
-    answer = None 
-    COUNT = 1000000
-    
-    self.write(question)
-
-    for _ in range(COUNT):
-
-      if self.port.in_waiting:
-        answer = self.port.readline()
-        print answer
-        break
-    
-    if not answer: print "timed out: no answer given"
-
-    return answer
-
-
   def connect_port(self, ser):
     
     success = False
     
     try:
-      self.port = serial.Serial(port = ser, baudrate = self.baudrate)
+      self.port = serial.Serial(port = ser, baudrate = self.baudrate, timeout = 3.0)
       success = True
       self.is_connected = True
-      print "connection successful!"
+      print "connected to:", ser
     except:
       self.is_connected = False 
       print "error connecting to port:", ser
@@ -96,12 +62,17 @@ class Relayer:
     return key 
 
   def write(self, message):
-
+  
     key = self.key(message)
-
-    if key:
-      self.port.write(key)
-      print "response is:", self.port.read() 
+    
+    if self.port:
+      if key:
+        self.port.write(key) 
+        print "finished sending key:", key
+      else:
+        print "no key sent"
+    else:
+      print "no port, try running connect() or check your connection"
 
   def print_keys(self):
     for k, v in self.keys.items():

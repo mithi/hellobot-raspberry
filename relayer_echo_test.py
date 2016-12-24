@@ -1,4 +1,5 @@
 from relayer import Relayer 
+from time import sleep
 
 relayer = Relayer()
 
@@ -14,13 +15,19 @@ print "connected?", relayer.check_connection()
 #signal and command are the same in routine, 
 #command means you are ordering something, signal means you are just informing
 relayer.signal("listening")
+sleep(3)
+
 relayer.signal("message decoded")
+sleep(3)
+
+relayer.command("move arms")
+sleep(3)
+
 relayer.command("forward")
+sleep(3)
+
 relayer.command("left")
+sleep(3)
+
 relayer.command("right")
-
-#prints out actual response from arduino
-print relayer.raw_answer("obstacle?")
-
-#answers are only true or false
-print relayer.answer("obstacle")
+sleep(3)
