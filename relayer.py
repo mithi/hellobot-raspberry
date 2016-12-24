@@ -1,4 +1,4 @@
-import Serial
+import serial
 
 class Relayer:
 
@@ -88,7 +88,8 @@ class Relayer:
     key = None
 
     try:
-      key = self.keys.message[message]
+      key = self.keys[message]
+      print "key is:", key
     except KeyError:
       print "No such key"
 
@@ -96,14 +97,16 @@ class Relayer:
 
   def write(self, message):
 
-    key = self.key("message")
+    key = self.key(message)
 
     if key:
-      self.port.write(key) 
+      self.port.write(key)
+      print "response is:", self.port.read() 
 
-  def keys(self):
-    return self.keys
+  def print_keys(self):
+    for k, v in self.keys.items():
+      print k, v
 
-  def is_connected(self):
+  def check_connection(self):
     return self.is_connected    
 

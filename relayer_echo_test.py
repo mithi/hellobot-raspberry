@@ -2,14 +2,14 @@ from relayer import Relayer
 
 relayer = Relayer()
 
-print ("keys:"), relayer.keys()
+relayer.print_keys()
 
-print "connected?", relayer.is_connected()
+print "connected?", relayer.check_connection()
 
 print ("connecting...")
 relayer.connect()
 
-print "connected?", relayer.is_connected()
+print "connected?", relayer.check_connection()
 
 #signal and command are the same in routine, 
 #command means you are ordering something, signal means you are just informing
