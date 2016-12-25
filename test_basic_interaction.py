@@ -1,5 +1,4 @@
-from robot_modules import Listener, Responder
-from helper import get_response
+from robot_modules import Listener, Responder, get_response
 
 listener = Listener()
 responder = Responder()

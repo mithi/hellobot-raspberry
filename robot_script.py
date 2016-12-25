@@ -1,8 +1,7 @@
 from gpiozero import MotionSensor
-from robot_modules import Listener, Responder, Directive
+from robot_modules import Listener, Responder, Directive, get_response
 from face_finder import FaceFinder
-from relayer import FaceFinder
-from helper import get_response
+from relayer import Relayer
 
 COUNTS = 10000
 TRIGGER_WORD = "super"
