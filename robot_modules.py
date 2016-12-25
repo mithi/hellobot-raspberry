@@ -20,7 +20,10 @@ class Responder:
 
   def show(self, key):
     os.system(self.animate_key + key + ".mp4")
-
+  
+  def greet(self):
+    self.show("hello" + str(random.randint(1, 6)))
+    
   def default(self):
     print self.static_eye
     os.system(self.static_eye)

@@ -46,8 +46,11 @@ def responder_test():
   sleep(10)
   responder.remove()
 
-  '''
   print "loop all videos"
+  
+  responder.greet()
+
+  responder.greet()
   
   responder.show("advice1")
   responder.show("advice2")
@@ -100,7 +103,7 @@ def responder_test():
   responder.show("up2")
   responder.show("up3")
   responder.show("up4")
-  '''
+  
   print "test complete"
 
 def listener_test():
