@@ -19,9 +19,13 @@ class FaceFinder:
     self.cascade = cv2.CascadeClassifier(CASCADE_PATH)
     self.image = None
     self.has_faces = False
+    self.has_face_previous = False
     self.faces = None
+    self.camera.start_preview()
 
   def run(self, box = True):
+
+    self.has_faces_previous = self.has_faces
 
     self.camera.capture(CURRENT_IMAGE_PATH, format='jpeg')      #get picture
     self.image = cv2.imread(CURRENT_IMAGE_PATH, 1)              #convert this to opencv image
@@ -38,10 +42,12 @@ class FaceFinder:
 
     if update: self.run()
 
-    if self.has_faces:
+    if self.has_faces and self.has_faces_previous:
       self.camera.stop_preview()
       os.system(SHOW_IMAGE2)
-    else:
+    elif self.has_faces:
+     os.system(SHOW_IMAGE2)
+    elif self.has_faces_previous:
       os.system(REMOVE_IMAGE)
       self.camera.start_preview()
  
