@@ -5,4 +5,4 @@ face_finder = FaceFinder()
 for _ in range(10):
   face_finder.show()
 
-face_finder.shut_down()
+face_finder.shutdown()

@@ -64,6 +64,7 @@ class FaceFinder:
     if update: self.run()
     return self.has_faces
 
-  def shut_down():
-    os.system(REMOVE_IMAGE)
+  def shutdown(self):
+    if self.has_faces:
+      os.system(REMOVE_IMAGE)
     self.camera.stop_preview()
