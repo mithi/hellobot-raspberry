@@ -19,7 +19,7 @@ class FaceFinder:
     self.cascade = cv2.CascadeClassifier(CASCADE_PATH)
     self.image = None
     self.has_faces = False
-    self.has_face_previous = False
+    self.has_faces_previous = False
     self.faces = None
     self.camera.start_preview()
 
