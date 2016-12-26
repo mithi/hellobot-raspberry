@@ -30,32 +30,34 @@ class FaceFinder:
 
     if len(self.faces):
       self.has_faces = True
-      if box = True: self.box_faces()   
+      if box == True: self.box_faces()   
     else:
       self.has_faces = False
       
   def show(self, update = True):
-    
-    os.system(REMOVE_IMAGE)
 
     if update: self.run()
 
     if self.has_faces:
+      self.camera.stop_preview()
       os.system(SHOW_IMAGE2)
     else:
-      os.system(SHOW_IMAGE)
+      os.system(REMOVE_IMAGE)
+      self.camera.start_preview()
  
   def box_faces(self):
     
     for (x, y, w, h) in self.faces:
       cv2.rectangle(self.image, (x, y),(x + w, y + h), (255, 255, 0), 2) #put rectangle on each face
      
-    cv2.imwrite(MARKED_IMAGE_PATH, self.image) #save picture
-    print "found: " + str(len(faces)) + " face(s)"
+    cv2.imwrite(CURRENT_MARKED_IMAGE_PATH, self.image) #save picture
+    #print "found: " + str(len(self.faces)) + " face(s)"
 
   def face_detected(self, update = True):
 
     if update: self.run()
     return self.has_faces
 
-
+  def shut_down():
+    os.system(REMOVE_IMAGE)
+    self.camera.stop_preview()

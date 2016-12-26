@@ -2,5 +2,7 @@ from face_finder import FaceFinder
 
 face_finder = FaceFinder()
 
-while True: 
+for _ in range(50):
   face_finder.show()
+
+face_finder.shut_down()
