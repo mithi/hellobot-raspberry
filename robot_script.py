@@ -20,6 +20,8 @@ def smart_move(key):
   for _ in range(0, COUNTS):
     if face_finder.face_detected(): relayer.command("move arms")
     face_finder.show(update = False)
+  
+  face_finder.shutdown()
 
 def obey(key):
   if key in ['forward', 'reverse', 'left', 'right']: smart_move(key)
