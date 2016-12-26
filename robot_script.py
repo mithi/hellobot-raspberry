@@ -22,7 +22,7 @@ def smart_move(key):
     face_finder.show(update = False)
 
 def obey(key):
-  if key in ['forward', 'left', 'right']: smart_move(key)
+  if key in ['forward', 'reverse', 'left', 'right']: smart_move(key)
 
 def listen():
 

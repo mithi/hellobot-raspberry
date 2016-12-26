@@ -9,6 +9,7 @@ SHOW_IMAGE2 = "sudo fbi -T 1 -d /dev/fb0 -a -noverbose /home/pi/hellobot/images/
 CURRENT_IMAGE_PATH = "/home/pi/hellobot/images/current.jpg"
 CURRENT_MARKED_IMAGE_PATH = "/home/pi/hellobot/images/current2.jpg"
 SHOW_IMAGE = "sudo fbi -T 1 -d /dev/fb0 -a -noverbose /home/pi/hellobot/images/current.jpg &"
+REMOVE_IMAGE = "sudo killall -3 fbi"
 
 class FaceFinder:
 
@@ -34,6 +35,8 @@ class FaceFinder:
       self.has_faces = False
       
   def show(self, update = True):
+    
+    os.system(REMOVE_IMAGE)
 
     if update: self.run()
 

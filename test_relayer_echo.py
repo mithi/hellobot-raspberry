@@ -23,6 +23,9 @@ sleep(3)
 relayer.command("move arms")
 sleep(3)
 
+relayer.command("reverse")
+sleep(3)
+
 relayer.command("forward")
 sleep(3)
 
@@ -31,3 +34,4 @@ sleep(3)
 
 relayer.command("right")
 sleep(3)
+
