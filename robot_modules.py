@@ -9,14 +9,12 @@ START_ANIMATION_COMMAND = "omxplayer -o local --win 0,0,480,800 " # -o alsa
 DEFAULT_FRAME_COMMAND = "sudo fbi -T 1 -d /dev/fb0 -a -noverbose /home/pi/hellobot/images/default-eye.jpg &" # remove sudo if necessary
 REMOVE_EYE_COMMAND = "sudo killall -3 fbi"
 LOW_POWER_COMMAND = "xset dpms force off"
+SHUTDOWN = "sudo shutdown -h now"
 
 class Responder:
 
   def __init__(self):
-    self.static_eye = DEFAULT_FRAME_COMMAND
     self.animate_key = START_ANIMATION_COMMAND + ANIMATION_PATH
-    self.low_power = LOW_POWER_COMMAND
-    self.remove_key = REMOVE_EYE_COMMAND
 
   def show(self, key):
     os.system(self.animate_key + key + ".mp4")
@@ -25,14 +23,16 @@ class Responder:
     self.show("hello" + str(random.randint(1, 6)))
     
   def default(self):
-    print self.static_eye
-    os.system(self.static_eye)
+    os.system(DEFAULT_FRAME_COMMAND)
 
   def black(self):
-    os.system(self.low_power)
+    os.system(LOW_POWER_COMMAND)
   
   def remove(self):
-    os.system(self.remove_key)
+    os.system(REMOVE_EYE_COMMAND)
+
+  def shutdown(self):
+    os.system(SHUTDOWN)
 
 class Listener:
   

@@ -25,6 +25,7 @@ def smart_move(key):
 
 def obey(key):
   if key in ['forward', 'reverse', 'left', 'right']: smart_move(key)
+  if key == 'death' = responder.shutdown()  
 
 def listen():
 
