@@ -43,8 +43,6 @@ def responder_test():
   sleep(10)
 
   responder.default()
-  sleep(10)
-  responder.remove()
 
   print "loop all videos"
   
@@ -94,16 +92,21 @@ def responder_test():
   responder.show("name2")
   responder.show("name3")
   responder.show("name4")
-  responder.show("plan1")
-  responder.show("plan2")
-  responder.show("plan3")
-  responder.show("plan4")
-  responder.show("plan5")
+  responder.show("office1")
+  responder.show("plans1")
+  responder.show("plans2")
+  responder.show("plans3")
+  responder.show("plans4")
+  responder.show("plans5")
   responder.show("up1")
   responder.show("up2")
   responder.show("up3")
   responder.show("up4")
-  
+
+  responder.default()
+  sleep(10)
+  responder.remove()
+
   print "test complete"
 
 def listener_test():
