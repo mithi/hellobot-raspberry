@@ -3,6 +3,7 @@ import picamera.array
 import cv2 
 import numpy 
 import os
+from time import sleep
 
 CASCADE_PATH = '/home/pi/hellobot/cascade/haarcascade_frontalface_default.xml'
 SHOW_IMAGE2 = "sudo fbi -T 1 -d /dev/fb0 -a -noverbose /home/pi/hellobot/images/current2.jpg &"
@@ -22,12 +23,13 @@ class FaceFinder:
     self.has_faces_previous = False
     self.faces = None
     self.camera.start_preview()
+    sleep(3)
 
   def run(self, box = True):
 
     self.has_faces_previous = self.has_faces
 
-    self.camera.capture(CURRENT_IMAGE_PATH, format='jpeg')      #get picture
+    self.camera.capture(CURRENT_IMAGE_PATH)                     #get picture
     self.image = cv2.imread(CURRENT_IMAGE_PATH, 1)              #convert this to opencv image
     gray = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)         #convert this to grey    
     self.faces = self.cascade.detectMultiScale(gray, 1.1, 5)    #look for face -- FIXME: tweak middle variable for performance
