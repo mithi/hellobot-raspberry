@@ -32,7 +32,8 @@ class FaceFinder:
     self.camera.capture(CURRENT_IMAGE_PATH)                     #get picture
     self.image = cv2.imread(CURRENT_IMAGE_PATH, 1)              #convert this to opencv image
     gray = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)         #convert this to grey    
-    self.faces = self.cascade.detectMultiScale(gray, 1.1, 5)    #look for face -- FIXME: tweak middle variable for performance
+    self.faces = self.cascade.detectMultiScale(image = gray, scaleFactor = 1.4, minNeighbors = 6, minSize = (100, 100), maxSize = (240, 240))    #look for face -- FIXME: tweak middle variable for performance
+    # see http://stackoverflow.com/questions/20801015/recommended-values-for-opencv-detectmultiscale-parameters
 
     if len(self.faces):
       self.has_faces = True
