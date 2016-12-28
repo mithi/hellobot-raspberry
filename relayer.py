@@ -30,8 +30,7 @@ class Relayer:
     self.write(message)
 
   def command(self, message):
-    #signal and command are the same in routine, 
-    #command means your ordering something, signal you are just informing
+    # signal and command are the same in routine, command means you're ordering something, signal you are just informing
     self.write(message)
 
   def connect_port(self, ser):
@@ -42,25 +41,23 @@ class Relayer:
       self.port = serial.Serial(port = ser, baudrate = self.baudrate, timeout = 3.0)
       success = True
       self.is_connected = True
-      print "connected to:", ser
+      print "Connected to:", ser
     except:
       self.is_connected = False 
-      print "error connecting to port:", ser
+      print "Error connecting to port:", ser
 
     return success
 
   def key(self, message):
-
-    print "message is:", message
     
     key = None
 
     try:
       key = self.keys[message]
-      print "key is:", key
     except KeyError:
       print "No such key"
-
+    
+    print "Message | Key :", message, "|", key
     return key 
 
   def write(self, message):
@@ -70,11 +67,11 @@ class Relayer:
     if self.port:
       if key:
         self.port.write(key) 
-        print "finished sending key:", key
+        print "SENT: Key | Message:", key, "|", message
       else:
-        print "no key sent"
+        print "No key sent"
     else:
-      print "no port, try running connect() or check your connection"
+      print "No port, try running connect() or check your connection"
 
   def print_keys(self):
     for k, v in self.keys.items():
