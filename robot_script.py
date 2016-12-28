@@ -19,7 +19,7 @@ def move(key):
   relayer.command(key) 
 
 def obey(key):
-  if key in ['forward', 'reverse', 'left', 'right']: move(key)
+  if key in ['forward', 'backward', 'left', 'right']: move(key)
   if key == 'death': responder.shutdown()
   if key == 'camera': robot_camera()
 
