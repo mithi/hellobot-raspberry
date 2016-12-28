@@ -1,13 +1,7 @@
 from gpiozero import MotionSensor
-from robot_modules import Responder, Listener
-from time import sleep
 
 PIR_PIN = 26
 pir = MotionSensor(PIR_PIN)
-responder = Responder()
-listener = Listener()
-
-responder.default()
 
 for _ in range(200):
 
