@@ -23,7 +23,6 @@ def obey(key):
   if key == 'death': responder.shutdown()
   if key == 'camera': robot_camera()
 
-
 def robot_camera():
 
   COUNT = 1000
@@ -32,7 +31,6 @@ def robot_camera():
     face_finder.show()
   
   face_finder.shutdown()
-
 
 def listen():
 
