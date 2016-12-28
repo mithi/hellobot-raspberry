@@ -1,3 +1,5 @@
+# TEMPORARY SCRIPT FOR NO CAMERA, PIR UNRELIABLE
+
 from gpiozero import MotionSensor
 from robot_modules import Listener, Responder, Directive, get_response
 from relayer import Relayer
@@ -61,7 +63,7 @@ while True:
     greet()
 
     while pir.motion_detected:
-      print "ready to interact!"
+      print "motion is till detected!"
       interact()
   else:
     print "no motion!"
