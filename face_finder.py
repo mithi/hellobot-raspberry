@@ -45,12 +45,12 @@ class FaceFinder:
 
     if update: self.run()
 
-    if self.has_faces and self.has_faces_previous:
-      self.camera.stop_preview()
+    if self.has_faces and self.has_faces_previous: #if shows face before, stop showing previous boxed image, show current boxed face
       os.system(SHOW_IMAGE2)
-    elif self.has_faces:
-     os.system(SHOW_IMAGE2)
-    elif self.has_faces_previous:
+    elif self.has_faces: # if first time with face, stop camera preview, then show boxed face
+      self.camera.stop_preview() 
+      os.system(SHOW_IMAGE2) 
+    elif self.has_faces_previous: #if shows face but now there's no more face, stop showing previous boxed face, show camera preview
       os.system(REMOVE_IMAGE)
       self.camera.start_preview()
  
