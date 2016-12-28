@@ -31,8 +31,6 @@ def directive_test():
   a ="OK" if x == "world" else "FAIL"
   print a 
 
-
-
 def responder_test():
   responder = Responder()
 
