@@ -1,5 +1,4 @@
 from relayer import Relayer 
-from time import sleep
 
 relayer = Relayer()
 
