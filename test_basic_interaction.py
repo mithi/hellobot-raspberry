@@ -21,7 +21,7 @@ say the following:
 4. up
 5. name
 6. do you do 
-7. office #FIX THIS, NOT WORKING YET 
+7. office
 8. plans
 9. tonight
 10. advice
