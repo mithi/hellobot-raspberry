@@ -20,7 +20,7 @@ while True:
     relayer.command("forward")
 
   if x == 'B':
-    relayer.command("reverse")
+    relayer.command("backward")
 
   if x == 'L':
     relayer.command("left")
@@ -38,7 +38,7 @@ while True:
     relayer.signal("message decoded")
 
   if x == 'S':
-    relayer.signal("smart forward")
+    relayer.command("smart forward")
 
   if x == 'X':
     break
