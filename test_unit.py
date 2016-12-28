@@ -37,17 +37,18 @@ def responder_test():
   responder = Responder()
 
   print "low power mode for three seconds"
-  sleep(0.5)
+  sleep(2)
 
-  responder.black()
+  responder.sleep()
+  sleep(10)
+
+  responder.wake()
   sleep(10)
 
   responder.default()
 
   print "loop all videos"
   
-  responder.greet()
-
   responder.greet()
   
   responder.show("advice1")
