@@ -3,7 +3,7 @@ from gpiozero import MotionSensor
 PIR_PIN = 26
 pir = MotionSensor(PIR_PIN)
 
-for _ in range(200):
+while True:
 
   if pir.motion_detected:
     print "motion detected"
@@ -11,5 +11,4 @@ for _ in range(200):
       print "motion still detected"
   else:
     print "no motion!"
-    
-  responder.sleep()
+   
