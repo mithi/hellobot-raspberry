@@ -23,7 +23,7 @@ raw_input("press any key to continue")
 relayer.command("move arms")
 raw_input("press any key to continue")
 
-relayer.command("reverse")
+relayer.command("backward")
 raw_input("press any key to continue")
 
 relayer.command("forward")
