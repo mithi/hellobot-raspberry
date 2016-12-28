@@ -57,9 +57,9 @@ class Listener:
     try:
       phrase = self.r.recognize_google(audio)
     except sr.UnknownValueError:
-      print "RECOGNIZED: GIBBERISH"
+      print "LISTENER ERROR: GIBBERISH"
     except sr.RequestError as e:
-      print("RECOGNIZED: REQUEST ERROR: {0}".format(e))
+      print("LISTENER: REQUEST ERROR: {0}".format(e))
 
     return phrase
 
@@ -73,20 +73,19 @@ class Directive:
 
   def command(self, phrase):
 
-    print "in directive=>phrase:", phrase
-
     command = None
 
-    if self.check(phrase):
-      # NOTE: using trigger word consecutively before command will not be detected
+    if self.check(phrase): # NOTE: using trigger word consecutively before command will not be detected
+      
       all_words = phrase.split()
       command_index = all_words.index(self.trigger) + 1
+      
       try:
         command = all_words[command_index]
       except IndexError:
         print "exception raised, index error?"
-
-      print "Command extracted: ", command
+    
+    print "Directive: Phrase | Command extracted: ", phrase, "|", command
     
     return command 
 
