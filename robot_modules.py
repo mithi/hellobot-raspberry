@@ -85,7 +85,7 @@ class Directive:
         command = all_words[command_index]
       except IndexError:
         print "exception raised, index error?"
-        command = None
+
       print "Command extracted: ", command
     
     return command 
