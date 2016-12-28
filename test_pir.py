@@ -18,9 +18,15 @@ for _ in range(200):
     responder.wake()
     responder.greet()
     sleep(0.01)
-
+    print "motion detected"
+    
     while pir.motion_detected:
       print listener.hear()
+      print "motion still detected"
+      
+  else:
+    print "no motion!"
+     
   
   responder.sleep() 
 
