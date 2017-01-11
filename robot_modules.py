@@ -84,9 +84,9 @@ class Directive:
       try:
         command = all_words[command_index]
       except IndexError:
-        print "exception raised, index error?"
+        print "exception raised, index error"
     
-    print "Directive: Phrase | Command extracted: ", phrase, "|", command
+    print "DIRECTIVE EXTRACTED: Phrase | Command: ", phrase, "|", command
     
     return command 
 
@@ -116,10 +116,3 @@ def get_response(phrase):
     key = "catch" + str(random.randint(1, 2))
 
   return key
- 
-def camera_stop():
-
-  CAMERA_START_SCRIPT = "sudo /home/pi/RPi_Cam_Web_Interface/start.sh"
-  CAMERA_STOP_SCRIPT = "sudo /home/pi/RPi_Cam_Web_Interface/stop.sh"
-  os.system(CAMERA_STOP_SCRIPT)
-  sleep(2) 
