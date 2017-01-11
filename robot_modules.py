@@ -6,13 +6,15 @@ from time import sleep
 #RESPONDER CONFIGURATION
 DEFAULT_STATIC_PATH = "/home/pi/hellobot/images/default-eye.jpg"
 ANIMATION_PATH = "/home/pi/hellobot/videos/"
+
 START_ANIMATION_COMMAND = "omxplayer -o alsa --win 0,0,480,800 " # -o alsa
 DEFAULT_FRAME_COMMAND = "sudo fbi -T 1 -d /dev/fb0 -a -noverbose /home/pi/hellobot/images/default-eye.jpg &" # remove sudo if necessary
+DISPLAY_OFF = 'sudo bash -c "echo 1 > /sys/class/backlight/rpi_backlight/bl_power"'
+DISPLAY_ON = 'sudo bash -c "echo 0 > /sys/class/backlight/rpi_backlight/bl_power"'
+
 REMOVE_EYE_COMMAND = "sudo killall -3 fbi"
 LOW_POWER_COMMAND = "xset dpms force off" #does not work via ssh
 SHUTDOWN = "sudo shutdown -h now"
-DISPLAY_OFF = 'sudo bash -c "echo 1 > /sys/class/backlight/rpi_backlight/bl_power"'
-DISPLAY_ON = 'sudo bash -c "echo 0 > /sys/class/backlight/rpi_backlight/bl_power"'
 
 class Responder:
 
@@ -58,7 +60,7 @@ class Listener:
     try:
       phrase = self.r.recognize_google(audio)
     except sr.UnknownValueError:
-      print "LISTENER ERROR: GIBBERISH"
+      print "LISTENER: ERROR GIBBERISH"
     except sr.RequestError as e:
       print("LISTENER: REQUEST ERROR: {0}".format(e))
 
@@ -83,10 +85,9 @@ class Directive:
       
       try:
         command = all_words[command_index]
+        print "DIRECTIVE EXTRACTED: Phrase | Command: ", phrase, "|", command
       except IndexError:
-        print "exception raised, index error"
-    
-    print "DIRECTIVE EXTRACTED: Phrase | Command: ", phrase, "|", command
+        print "DIRECTIVE: NO COMMAND - INDEX ERROR"
     
     return command 
 
