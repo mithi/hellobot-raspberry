@@ -73,3 +73,4 @@ class FaceFinder:
       os.system(REMOVE_IMAGE)
     else:
       self.camera.stop_preview()
+    self.camera.close()
