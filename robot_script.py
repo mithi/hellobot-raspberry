@@ -14,10 +14,11 @@ responder = Responder()                # plays video on screen
 relayer = Relayer()                    # communicates to arduino
 directive = Directive(TRIGGER_WORD)
 pir = MotionSensor(PIR_PIN)
-face_finder = FaceFinder()
+
 
 def smart_camera():
-
+  
+  face_finder = FaceFinder()
   COUNT = 1000
 
   for _ in range(COUNT):
@@ -25,13 +26,9 @@ def smart_camera():
   
   face_finder.shutdown()
   
-def shutdown():
-  SHUTDOWN = "sudo shutdown -h now"
-  os.system(SHUTDOWN)
-  
 def obey(key):
   if key in ['forward', 'backward', 'left', 'right']: relayer.command(key)
-  if key == 'death': shutdown()
+  if key == 'death': os.system("sudo shutdown -h now")
   if key == 'camera': smart_camera()
 
 def listen():
@@ -44,8 +41,7 @@ def reply(phrase):
   relayer.command("move arms")
   responder.show(get_response(phrase))        # plays the corresponding video given the video title 
 
-def interact():
-  phrase = listen()
+def interact(phase):
   if phrase:
     key = directive.command(phrase)
     obey(key) if key else reply(phrase)
@@ -56,23 +52,30 @@ def greet():
   responder.wake()
   responder.greet()
 
-###########################################################################################################
+############################################################
 
-responder.default()               #shows default eye image on screen
-relayer.connect()                 #connect to arduino port
-
-while True:
+def main():
   
   if pir.motion_detected:
-
-    greet()
     print "person detected for the first time"
+    greet()
 
     while pir.motion_detected:
-      interact()
       print "person still detected"
+      interact(listen())
 
   responder.sleep()
   print "no person detected"
 
-
+if __name__ == '__main__':
+  
+  responder.default()               #shows default eye image on screen
+  relayer.connect()                 #connect to arduino port
+  
+  while True:
+    try:
+      main()
+    except KeyboardInterrupt:
+      print "quitting..."
+      sys.exit()
+  
