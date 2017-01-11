@@ -3,27 +3,22 @@ from robot_modules import Listener, Responder, Directive, get_response
 from face_finder import FaceFinder
 from relayer import Relayer
 from time import sleep 
-import os 
+import os
+import sys
 
-COUNTS = 10000
 TRIGGER_WORD = "robot"
 PIR_PIN = 26
-
 listener = Listener()                  # listens to microphone and outputs text
 responder = Responder()                # plays video on screen 
 relayer = Relayer()                    # communicates to arduino
 directive = Directive(TRIGGER_WORD)
 pir = MotionSensor(PIR_PIN)
 
-
 def smart_camera():
-  
-  face_finder = FaceFinder()
   COUNT = 1000
-
+  face_finder = FaceFinder()
   for _ in range(COUNT):
     face_finder.show()
-  
   face_finder.shutdown()
   
 def obey(key):
@@ -37,14 +32,15 @@ def listen():
   relayer.signal("message decoded")
   return phrase
 
-def reply(phrase):
+def reply(key):
   relayer.command("move arms")
-  responder.show(get_response(phrase))        # plays the corresponding video given the video title 
+  responder.show(key)
 
-def interact(phase):
+def interact():
+  phrase = listen()
   if phrase:
     key = directive.command(phrase)
-    obey(key) if key else reply(phrase)
+    obey(key) if key else reply(get_response(phrase))
 
 def greet():
   relayer.signal("move arms")
@@ -62,7 +58,7 @@ def main():
 
     while pir.motion_detected:
       print "person still detected"
-      interact(listen())
+      interact()
 
   responder.sleep()
   print "no person detected"
