@@ -13,10 +13,11 @@ relayer.connect()
 
 print "connected?", relayer.check_connection()
 
+response.default()
 
 while True:
 
-  x = raw_input("F B L R A H D S X 1 - 8:")
+  x = raw_input("f b l r a h d s x 1 - 8:")
   
   if x == '1':
     response.show("hello5") 
