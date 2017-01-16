@@ -57,7 +57,7 @@ def main():
     print "person detected for the first time"
     greet()
 
-    for x in range(10):
+    for x in range(20):
       print "count", x
       interact()
 
