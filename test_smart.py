@@ -16,9 +16,11 @@ print "connected?", relayer.check_connection()
 response.default()
 
 while True:
-
-  x = raw_input("f b l r a h d s x 1 - 8:")
   
+  response.default()
+  x = raw_input("g f b l r a h d s x 1 - 8:")
+  response.default()
+
   if x == '1':
     response.show("hello5") 
     #how may i help you!
@@ -51,7 +53,7 @@ while True:
     response.show("up4")
     #I wasn't programmed to respond to existential inquiries
 
-  if x == 'G':
+  if x == 'g':
     relayer.command("move arms")
     response.show("hello3")
 
@@ -68,29 +70,29 @@ while True:
     relayer.command("move arms")
     response.show("hello4")
 
-  if x == 'F':
+  if x == 'f':
     relayer.command("forward")
 
-  if x == 'B':
+  if x == 'b':
     relayer.command("backward")
 
-  if x == 'L':
+  if x == 'l':
     relayer.command("left")
 
-  if x == 'R':
+  if x == 'r':
     relayer.command("right")
 
-  if x == 'A':
+  if x == 'a':
     relayer.command("move arms")
 
-  if x == 'H':
+  if x == 'h':
     relayer.signal("listening")
 
-  if x == 'D':
+  if x == 'd':
     relayer.signal("message decoded")
 
-  if x == 'S':
+  if x == 's':
     relayer.command("smart forward")
 
-  if x == 'X':
+  if x == 'x':
     break
