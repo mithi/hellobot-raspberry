@@ -60,7 +60,7 @@ def main():
       print "person still detected"
       interact()
 
-  responder.sleep()
+  re
   print "no person detected"
 
 if __name__ == '__main__':

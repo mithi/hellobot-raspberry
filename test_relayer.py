@@ -19,7 +19,7 @@ while True:
     relayer.command("forward")
 
   if x == 'B':
-    relayer.command("backward")
+    relayer.command("back")
 
   if x == 'L':
     relayer.command("left")
