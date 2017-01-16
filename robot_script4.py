@@ -1,4 +1,4 @@
-from gpiozero import MotionSensor
+import RPi.GPIO as GPIO
 from robot_modules import Listener, Responder, Directive, get_response
 from face_finder import FaceFinder
 from relayer import Relayer
@@ -12,7 +12,8 @@ listener = Listener()                  # listens to microphone and outputs text
 responder = Responder()                # plays video on screen 
 relayer = Relayer()                    # communicates to arduino
 directive = Directive(TRIGGER_WORD)
-pir = MotionSensor(PIR_PIN)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(PIR_PIN, GPIO.IN)
 
 def smart_camera():
   COUNT = 50
@@ -52,16 +53,17 @@ def greet():
 
 def main():
   
-  if pir.motion_detected:
+  if GPIO.input(PIR_PIN):
     print "person detected for the first time"
     greet()
 
-    while pir.motion_detected:
-      print "person still detected"
+    for x in range(10):
+      print "count", x
       interact()
 
   responder.sleep()
   print "no person detected"
+  sleep(1)
 
 if __name__ == '__main__':
   
@@ -73,5 +75,12 @@ if __name__ == '__main__':
       main()
     except KeyboardInterrupt:
       print "quitting..."
+      GPIO.cleanup()
+      relayer.signal("message decoded")
+      responder.sleep()
+      try:
+        os.system("/home/pi/RPi_Cam_Web_Interface/stop.sh")
+      except:
+        pass
       sys.exit()
-  
+

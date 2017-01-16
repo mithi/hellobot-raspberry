@@ -16,23 +16,25 @@ response.default()
 
 while True:
   
-  response.default()
   x = raw_input("s f b l r a 1 2 3 4 e:")
-
 
   if x == 's':
     response.sleep()
+    relayer.signal("listening")
+    sleep(0.25)
+    relayer.signal("message decoded")
     sleep(2)
+    response.wake()
     response.default()
-    response.show("hello3")
-    relayer.command("move arms")
+    #relayer.command("move arms")
     relayer.command("forward")
     relayer.command("back")
-    relayer.command("left")
-    relayer.command("right")
-    relayer.command("move arms")
+    #relayer.command("left")
+    #relayer.command("right")
+    #relayer.command("move arms")
+    sleep(3)
     response.show("EVERYONE")
-    relayer.command("move arms")
+    #relayer.command("move arms")
   
   elif x == 'f':
     relayer.command("forward")

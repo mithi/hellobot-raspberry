@@ -46,19 +46,32 @@ class Listener:
   
   def __init__(self):
     self.r = sr.Recognizer()
+    self.r.dynamic_energy_threshold = False
+    self.r.energy_threshold = 300
 
   def hear(self):
     return self.recognize(self.obtain_audio())
   
   def obtain_audio(self):
-    with sr.Microphone(device_index = 0, sample_rate = 48000, chunk_size = 1024) as source:
-      return self.r.listen(source)
+    
+    sound = None
+
+    try:
+      with sr.Microphone(device_index = 0, sample_rate = 48000, chunk_size = 1024) as source:
+        sound = self.r.listen(source, timeout= 5.0)
+        print "dynamic energy threshold:", self.r.energy_threshold
+    except:
+      print "timeout!"
+      pass
+    
+    return sound
   
   def recognize(self, audio):
     phrase = None
 
     try:
-      phrase = self.r.recognize_google(audio)
+      if audio:
+        phrase = self.r.recognize_google(audio)
     except sr.UnknownValueError:
       print "LISTENER: ERROR GIBBERISH"
     except sr.RequestError as e:
