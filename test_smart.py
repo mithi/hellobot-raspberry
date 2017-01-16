@@ -18,7 +18,7 @@ response.default()
 while True:
   
   response.default()
-  x = raw_input("g f b l r a h d s x 1 - 8:")
+  x = raw_input("g f b l r a h d s  e 1 - 8:")
   response.default()
 
   if x == '1':
@@ -65,7 +65,6 @@ while True:
     response.show("g_Eric")
     response.show("g_Kathy")
     response.show("g_RenRen")
-    response.show("g_MVP")
 
     relayer.command("move arms")
     response.show("hello4")
@@ -94,5 +93,5 @@ while True:
   if x == 's':
     relayer.command("smart forward")
 
-  if x == 'x':
+  if x == 'e':
     break

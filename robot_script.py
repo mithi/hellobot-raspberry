@@ -15,7 +15,7 @@ directive = Directive(TRIGGER_WORD)
 pir = MotionSensor(PIR_PIN)
 
 def smart_camera():
-  COUNT = 1000
+  COUNT = 50
   face_finder = FaceFinder()
   for _ in range(COUNT):
     face_finder.show()

@@ -81,13 +81,18 @@ class Directive:
     if self.check(phrase): # NOTE: using trigger word consecutively before command will not be detected
       
       all_words = phrase.split()
-      command_index = all_words.index(self.trigger) + 1
-      
+     
       try:
-        command = all_words[command_index]
-        print "DIRECTIVE EXTRACTED: Phrase | Command: ", phrase, "|", command
-      except IndexError:
-        print "DIRECTIVE: NO COMMAND - INDEX ERROR"
+        command_index = all_words.index(self.trigger) + 1
+
+        try:
+          command = all_words[command_index]
+          print "DIRECTIVE EXTRACTED: Phrase | Command: ", phrase, "|", command
+        except IndexError:
+          print "DIRECTIVE: NO COMMAND - INDEX ERROR"
+
+      except ValueError:
+        print "DIRECTIVE: NO COMMAND - VALUE ERROR" 
     
     return command 
 

@@ -13,8 +13,8 @@ class Relayer:
       "message decoded": 'D',
       "move arms": 'A',
       "forward": 'F',
-      "left": 'L',
-      "right": 'R',
+      "left": 'R',
+      "right": 'L',
       "backward": 'B',
       "smart forward": 'S'
     }
