@@ -7,11 +7,13 @@ import os
 import sys
 
 TRIGGER_WORD = "robot"
-PIR_PIN = 26
+directive = Directive(TRIGGER_WORD)
+
 listener = Listener()                  # listens to microphone and outputs text
 responder = Responder()                # plays video on screen 
 relayer = Relayer()                    # communicates to arduino
-directive = Directive(TRIGGER_WORD)
+
+PIR_PIN = 26
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(PIR_PIN, GPIO.IN)
 
@@ -50,7 +52,17 @@ def greet():
   responder.greet()
 
 ############################################################
-
+def cleanup():
+  print "quitting..."
+  GPIO.cleanup()
+  relayer.signal("message decoded")
+  responder.sleep()
+  try:
+    os.system("/home/pi/RPi_Cam_Web_Interface/stop.sh")
+  except:
+    pass
+  sys.exit()
+      
 def main():
   
   if GPIO.input(PIR_PIN):
@@ -74,13 +86,5 @@ if __name__ == '__main__':
     try:
       main()
     except KeyboardInterrupt:
-      print "quitting..."
-      GPIO.cleanup()
-      relayer.signal("message decoded")
-      responder.sleep()
-      try:
-        os.system("/home/pi/RPi_Cam_Web_Interface/stop.sh")
-      except:
-        pass
-      sys.exit()
+      cleanup()
 
