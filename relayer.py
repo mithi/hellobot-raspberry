@@ -55,9 +55,9 @@ class Relayer:
     try:
       key = self.keys[message]
     except KeyError:
-      print "No such key"
+      print "ERROR: No such key"
     
-    print "Message | Key :", message, "|", key
+    #print "Message | Key :", message, "|", key
     return key 
 
   def write(self, message):
@@ -67,11 +67,11 @@ class Relayer:
     if self.port:
       if key:
         self.port.write(key) 
-        print "SENT: Key | Message:", key, "|", message
+        #print "SENT: Key | Message:", key, "|", message
       else:
-        print "No key sent"
+        print "ERROR: No key sent"
     else:
-      print "No port, try running connect() or check your connection"
+      print "ERROR: No port, try running connect() or check your connection"
 
   def print_keys(self):
     for k, v in self.keys.items():

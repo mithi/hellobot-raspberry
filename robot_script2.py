@@ -1,74 +1,95 @@
-# TEMPORARY SCRIPT FOR NO CAMERA, PIR UNRELIABLE
-
-from gpiozero import MotionSensor
+import RPi.GPIO as GPIO
 from robot_modules import Listener, Responder, Directive, get_response
+from face_finder import FaceFinder
 from relayer import Relayer
 from time import sleep 
+import os
+import sys
 
-COUNTS = 10000
 TRIGGER_WORD = "robot"
-PIR_PIN = 26
-
-pir = MotionSensor(PIR_PIN)
-listener = Listener()      # listens to microphone and outputs text
-responder = Responder()    # plays video on screen 
-relayer = Relayer()        # communicates to arduino
 directive = Directive(TRIGGER_WORD)
 
-def move(key):
-  relayer.command(key) 
+listener = Listener()                  # listens to microphone and outputs text
+responder = Responder()                # plays video on screen 
+relayer = Relayer()                    # communicates to arduino
 
+PIR_PIN = 26
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(PIR_PIN, GPIO.IN)
+
+def stop_camera():
+  try:
+    os.system("/home/pi/RPi_Cam_Web_Interface/stop.sh")
+  except:
+    pass
+
+def smart_camera():
+  COUNT = 50
+  face_finder = FaceFinder()
+  for _ in range(COUNT):
+    face_finder.show()
+  face_finder.shutdown()
+  responder.default()
+  
 def obey(key):
-  if key in ['forward', 'backward', 'left', 'right']: move(key)
-  if key == 'death': responder.shutdown()
+  if key in ['forward', 'back', 'left', 'right']: relayer.command(key)
+  if key == 'death': os.system("sudo shutdown -h now")
+  if key == 'camera': smart_camera()
 
 def listen():
-
   relayer.signal("listening")
-  print "listening!"
   phrase = listener.hear()
   relayer.signal("message decoded")
-  print "you said:", phrase
   return phrase
 
-def reply(phrase):
-
+def reply(key):
   relayer.command("move arms")
-  response = get_response(phrase) # picks one of several appropriate responses (video title) 
-                                  # based on whether the given phrase contains a specific keyword 
-  responder.show(response)        # plays the corresponding video given the video title 
+  responder.show(key)
 
 def interact():
-
   phrase = listen()
   if phrase:
     key = directive.command(phrase)
-    obey(key) if key else reply(phrase)
+    obey(key) if key else reply(get_response(phrase))
 
 def greet():
   relayer.signal("move arms")
-  #responder.default()
-  #responder.wake()
+  responder.default()
+  responder.wake()
   responder.greet()
 
-###########################################################################################################
-
-responder.default()               #shows default eye image on screen
-relayer.connect()                 #connect to arduino port
-
-while True:
+############################################################
+def cleanup():
+  print "quitting..."
+  GPIO.cleanup()
+  relayer.signal("message decoded")
+  responder.sleep()
+  stop_camera()
+  sys.exit()
+      
+def main():
   
-  if pir.motion_detected:
-    print "motion detected!"
+  if GPIO.input(PIR_PIN):
+    print "person detected for the first time"
     greet()
 
-    while pir.motion_detected:
-      print "motion is till detected!"
+    for x in range(20):
+      print "count", x
       interact()
-  else:
-    print "no motion!"
 
-  interact()
+  responder.sleep()
+  print "no person detected"
+  sleep(1)
 
-  #responder.sleep()  
+if __name__ == '__main__':
+  
+  responder.default()               #shows default eye image on screen
+  relayer.connect()                 #connect to arduino port
+  stop_camera()
+  
+  while True:
+    try:
+      main()
+    except KeyboardInterrupt:
+      cleanup()
 

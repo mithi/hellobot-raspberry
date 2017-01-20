@@ -59,10 +59,8 @@ class Listener:
     try:
       with sr.Microphone(device_index = 0, sample_rate = 48000, chunk_size = 1024) as source:
         sound = self.r.listen(source, timeout= 5.0)
-        print "dynamic energy threshold:", self.r.energy_threshold
     except:
-      print "timeout!"
-      pass
+      print "timeout![LISTENER]"
     
     return sound
   
@@ -73,9 +71,9 @@ class Listener:
       if audio:
         phrase = self.r.recognize_google(audio)
     except sr.UnknownValueError:
-      print "LISTENER: ERROR GIBBERISH"
+      print "ERROR GIBBERISH [LISTENER]"
     except sr.RequestError as e:
-      print("LISTENER: REQUEST ERROR: {0}".format(e))
+      print("ERROR REQUEST [LISTENER]: {0}".format(e))
 
     return phrase
 
@@ -102,10 +100,10 @@ class Directive:
           command = all_words[command_index]
           print "DIRECTIVE EXTRACTED: Phrase | Command: ", phrase, "|", command
         except IndexError:
-          print "DIRECTIVE: NO COMMAND - INDEX ERROR"
+          print "ERROR DIRECTIVE INDEX ERROR"
 
       except ValueError:
-        print "DIRECTIVE: NO COMMAND - VALUE ERROR" 
+        print "ERROR DIRECTIVE VALUE ERROR" 
     
     return command 
 
