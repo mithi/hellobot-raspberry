@@ -42,18 +42,20 @@ def obey(key):
   if key in ['forward', 'back', 'left', 'right']: relayer.command(key)
   if key == 'die': os.system("sudo shutdown -h now")
   if key == 'camera': smart_camera()
-  if key == "sing": responder.show("sing" + randint(0, 1))
+  if key == "sing" or key == "saying": responder.show("sing" + str(randint(0, 1)))
 
 def listen():
-  responder.show("listening-transition-A")
+  #responder.show("listening-transition-A")
   responder.listening()
   phrase = listener.hear()
-  responder.show("listening-transition-B")
+  print phrase
+  #responder.show("listening-transition-B")
   responder.default()
   return phrase
 
 def reply(key):
   relayer.command("move arms")
+  print "reply - key:", key
   responder.show(key)
 
 def interact():

@@ -142,22 +142,24 @@ def get_nestle_response(phrase):
   
   if "hello" in phrase or "hey" in phrase or "hi" in phrase: #greet
     key = "hello" + str(random.randint(1, 5))
-  elif "how are you" in phrase: #how are you?
+  elif "how" in phrase: #how are you?
     key = "how" + str(random.randint(1,2))
   elif "up" in phrase or "whatsApp" in phrase: #what's up?
     key = "up" + str(random.randint(1, 2))
   elif "name" in phrase: #what's your name?
     key = "else"
-  elif "do you do" in phrase: #what do you do?
+  elif "do" in phrase: #what do you do?
     key = "do1"
+  elif "from" in phrase or "where" in phrase: #where are you from?
+    key = "from1"  
   elif "plans" in phrase or "tonight" in phrase: #what are your plans tonight?
     key = "plans" + str(random.randint(1, 3))
   elif "advice" in phrase: #do you have advice?
     key = "advice" + str(random.randint(1, 5))
   elif "idea" in phrase or "help" in phrase: #i need an idea
-    key = "help" + str(random.randint(1, 3))
+    key = "idea" + str(random.randint(1, 3))
   else:
-    key = "else" + str(random.randint(1, 2))
+    key = "else"
 
   return key
 
