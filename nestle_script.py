@@ -41,7 +41,7 @@ def get_nestle_response(phrase):
   elif "advice" in phrase or "help" in phrase: #do you have advice?
     key = "advice" + str(random.randint(1, 2))
   elif "idea" in phrase : #i need an idea
-    key = "help" + str(random.randint(1, 2))
+    key = "idea" + str(random.randint(1, 2))
   else:
     key = "else"
 
@@ -67,7 +67,7 @@ def obey(key):
   if key in ['forward', 'back', 'left', 'right']: relayer.command(key)
   if key == 'die': os.system("sudo shutdown -h now")
   if key == 'camera': smart_camera()
-  if key == "sing" or key == "saying": responder.show("sing" + str(randint(0, 1)))
+  if key == "sing" or key == "saying": responder.show("sing" + str(randint(1, 2)))
 
 def listen():
   #responder.show("listening-transition-A")
