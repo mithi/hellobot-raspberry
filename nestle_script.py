@@ -27,21 +27,21 @@ relayer = Relayer()                                 # communicates to arduino
 def get_nestle_response(phrase):  
   
   if "hello" in phrase or "hey" in phrase or "hi" in phrase: #greet
-    key = "hello" + str(random.randint(1, 3))
+    key = "hello" + str(randint(1, 3))
   elif "how" in phrase: #how are you?
-    key = "how" + str(random.randint(1, 3))
+    key = "how" + str(randint(1, 3))
   elif "up" in phrase or "whatsApp" in phrase: #what's up?
-    key = "up" + str(random.randint(1, 3))
+    key = "up" + str(randint(1, 3))
   elif "name" in phrase: #what's your name?
     key = "else"
   elif "do" in phrase: #what do you do?
-    key = "do" + str(random.randint(1, 3))
+    key = "do" + str(randint(1, 3))
   elif "plans" in phrase or "tonight" in phrase: #what are your plans tonight?
-    key = "plans" + str(random.randint(1, 2))
+    key = "plans" + str(randint(1, 2))
   elif "advice" in phrase or "help" in phrase: #do you have advice?
-    key = "advice" + str(random.randint(1, 2))
+    key = "advice" + str(randint(1, 2))
   elif "idea" in phrase : #i need an idea
-    key = "idea" + str(random.randint(1, 2))
+    key = "idea" + str(randint(1, 2))
   else:
     key = "else"
 
@@ -71,10 +71,12 @@ def obey(key):
 
 def listen():
   #responder.show("listening-transition-A")
+  responder.remove()
   responder.listening()
   phrase = listener.hear()
   print phrase
   #responder.show("listening-transition-B")
+  responder.remove()
   responder.default()
   return phrase
 
@@ -91,9 +93,10 @@ def interact():
 
 def greet():
   relayer.signal("move arms")
+  responder.remove()
   responder.default()
   responder.wake()
-  responder.greet()
+  responder.show("greet" + str(randint(1,2)))
 
 
 ############################################################
@@ -114,7 +117,7 @@ def main():
       interact()
 
   responder.sleep()
-  #print "no person detected"
+  print "no person detected"
   sleep(0.5)
 
 if __name__ == '__main__':
