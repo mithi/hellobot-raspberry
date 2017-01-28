@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from robot_modules import Listener, Responder, Directive, get_nestle_response
+from robot_modules import Listener, Responder, Directive
 from face_finder import FaceFinder
 from relayer import Relayer
 from time import sleep 
@@ -24,6 +24,31 @@ relayer = Relayer()                                 # communicates to arduino
 
 ############################################################
 
+def get_nestle_response(phrase):  
+  
+  if "hello" in phrase or "hey" in phrase or "hi" in phrase: #greet
+    key = "hello" + str(random.randint(1, 3))
+  elif "how" in phrase: #how are you?
+    key = "how" + str(random.randint(1, 3))
+  elif "up" in phrase or "whatsApp" in phrase: #what's up?
+    key = "up" + str(random.randint(1, 3))
+  elif "name" in phrase: #what's your name?
+    key = "else"
+  elif "do" in phrase: #what do you do?
+    key = "do" + str(random.randint(1, 3))
+  elif "plans" in phrase or "tonight" in phrase: #what are your plans tonight?
+    key = "plans" + str(random.randint(1, 2))
+  elif "advice" in phrase or "help" in phrase: #do you have advice?
+    key = "advice" + str(random.randint(1, 2))
+  elif "idea" in phrase : #i need an idea
+    key = "help" + str(random.randint(1, 2))
+  else:
+    key = "else"
+
+  return key
+
+############################################################
+
 def stop_camera():
   try:
     os.system("/home/pi/RPi_Cam_Web_Interface/stop.sh")
@@ -42,18 +67,20 @@ def obey(key):
   if key in ['forward', 'back', 'left', 'right']: relayer.command(key)
   if key == 'die': os.system("sudo shutdown -h now")
   if key == 'camera': smart_camera()
-  if key == "sing": responder.show("sing" + randint(0, 1))
+  if key == "sing" or key == "saying": responder.show("sing" + str(randint(0, 1)))
 
 def listen():
-  responder.show("listening-transition-A")
+  #responder.show("listening-transition-A")
   responder.listening()
   phrase = listener.hear()
-  responder.show("listening-transition-B")
+  print phrase
+  #responder.show("listening-transition-B")
   responder.default()
   return phrase
 
 def reply(key):
   relayer.command("move arms")
+  print "reply - key:", key
   responder.show(key)
 
 def interact():
@@ -67,6 +94,7 @@ def greet():
   responder.default()
   responder.wake()
   responder.greet()
+
 
 ############################################################
 
@@ -102,4 +130,3 @@ if __name__ == '__main__':
       cleanup()
 
 ############################################################
-
