@@ -6,9 +6,10 @@ from time import sleep
 #RESPONDER CONFIGURATION
 DEFAULT_STATIC_PATH = "/home/pi/hellobot/images/default-eye.jpg"
 ANIMATION_PATH = "/home/pi/hellobot/videos/"
-
-START_ANIMATION_COMMAND = "omxplayer -o alsa --win 0,0,480,800 " # -o alsa
+NESTLE_VIDEOS = "/home/pi/hellobot/videos/"
+START_ANIMATION_COMMAND = "omxplayer -o alsa --win 0,0,480,800 " 
 DEFAULT_FRAME_COMMAND = "sudo fbi -T 1 -d /dev/fb0 -a -noverbose /home/pi/hellobot/images/default-eye.jpg &" # remove sudo if necessary
+LISTENING_FRAME_COMMAND = "sudo fbi -T 1 -d /dev/fb0 -a -noverbose /home/pi/hellobot/images/listening-eye.jpg &"
 DISPLAY_OFF = 'sudo bash -c "echo 1 > /sys/class/backlight/rpi_backlight/bl_power"'
 DISPLAY_ON = 'sudo bash -c "echo 0 > /sys/class/backlight/rpi_backlight/bl_power"'
 
@@ -18,8 +19,8 @@ SHUTDOWN = "sudo shutdown -h now"
 
 class Responder:
 
-  def __init__(self):
-    self.animate_key = START_ANIMATION_COMMAND + ANIMATION_PATH
+  def __init__(self, path = ANIMATION_PATH):
+    self.animate_key = START_ANIMATION_COMMAND + path
 
   def show(self, key):
     os.system(self.animate_key + key + ".mp4")
@@ -29,6 +30,9 @@ class Responder:
     
   def default(self):
     os.system(DEFAULT_FRAME_COMMAND)
+
+  def listening(self):
+    os.system(LISTENING_FRAME_COMMAND)
 
   def sleep(self):
     os.system(DISPLAY_OFF)
@@ -44,10 +48,10 @@ class Responder:
 
 class Listener:
   
-  def __init__(self):
+  def __init__(self, thresh = 300):
     self.r = sr.Recognizer()
     self.r.dynamic_energy_threshold = False
-    self.r.energy_threshold = 300
+    self.r.energy_threshold = thresh
 
   def hear(self):
     return self.recognize(self.obtain_audio())
@@ -133,3 +137,27 @@ def get_response(phrase):
     key = "catch" + str(random.randint(1, 2))
 
   return key
+
+def get_nestle_response(phrase):  
+  
+  if "hello" in phrase or "hey" in phrase or "hi" in phrase: #greet
+    key = "hello" + str(random.randint(1, 5))
+  elif "how are you" in phrase: #how are you?
+    key = "how" + str(random.randint(1,2))
+  elif "up" in phrase or "whatsApp" in phrase: #what's up?
+    key = "up" + str(random.randint(1, 2))
+  elif "name" in phrase: #what's your name?
+    key = "else"
+  elif "do you do" in phrase: #what do you do?
+    key = "do1"
+  elif "plans" in phrase or "tonight" in phrase: #what are your plans tonight?
+    key = "plans" + str(random.randint(1, 3))
+  elif "advice" in phrase: #do you have advice?
+    key = "advice" + str(random.randint(1, 5))
+  elif "idea" in phrase or "help" in phrase: #i need an idea
+    key = "help" + str(random.randint(1, 3))
+  else:
+    key = "else" + str(random.randint(1, 2))
+
+  return key
+

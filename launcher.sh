@@ -4,5 +4,5 @@
 
 cd /
 cd home/pi/hellobot
-sudo python robot_script4.py
+sudo python nestle_script.py
 cd /
