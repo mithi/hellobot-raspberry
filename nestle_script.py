@@ -12,7 +12,7 @@ import sys
 TRIGGER_WORD = "robot"
 directive = Directive(TRIGGER_WORD)
 
-NESTLE_VIDEOS = "/home/pi/hellobot/videos/"         
+NESTLE_VIDEOS = "/home/pi/hellobot/mped_videos/"         
 responder = Responder(path = NESTLE_VIDEOS)         # plays video on screen 
 
 PIR_PIN = 26
