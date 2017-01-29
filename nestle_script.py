@@ -70,13 +70,13 @@ def obey(key):
   if key == "sing" or key == "saying": responder.show("sing" + str(randint(1, 2)))
 
 def listen():
-  responder.show("listening-transition-A")
   responder.remove()
+  responder.show("listening-transition-A")
   responder.listening()
   phrase = listener.hear()
   print phrase
-  responder.show("listening-transition-B")
   responder.remove()
+  responder.show("listening-transition-B")
   responder.default()
   return phrase
 
