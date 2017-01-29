@@ -33,7 +33,7 @@ def get_nestle_response(phrase):
   elif "up" in phrase or "whatsApp" in phrase: #what's up?
     key = "up" + str(randint(1, 3))
   elif "name" in phrase: #what's your name?
-    key = "else"
+    key = "name" + str(randint(1, 2))
   elif "do" in phrase: #what do you do?
     key = "do" + str(randint(1, 3))
   elif "plans" in phrase or "tonight" in phrase: #what are your plans tonight?
@@ -70,12 +70,12 @@ def obey(key):
   if key == "sing" or key == "saying": responder.show("sing" + str(randint(1, 2)))
 
 def listen():
-  #responder.show("listening-transition-A")
+  responder.show("listening-transition-A")
   responder.remove()
   responder.listening()
   phrase = listener.hear()
   print phrase
-  #responder.show("listening-transition-B")
+  responder.show("listening-transition-B")
   responder.remove()
   responder.default()
   return phrase
