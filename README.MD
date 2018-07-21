@@ -1,4 +1,14 @@
 # 2015 - 2016 ROBOTICS PROJECTS
+- Stubby
+- Hellobot
+- Maya
+- Ringo
+
+# Other Related Projects 
+- [Nine Electronics Maker Projects Including a Robot Arm and Automated Xylophone](https://github.com/mithi/old-maker-toys)
+- [Dancing Hexapod](https://github.com/mithi/hexy)
+- [Some Udacity Projects](https://github.com/mithi/some-udacity-projects)
+- [Arduino BootCamp](https://github.com/mithi/arduino-basic)
 
 # STUBBY
 - Scripts for visual artist Daniel Slattnes. The movements done by the hexapod robot is supposedly based on the signals from the mounted plant's leaves.
