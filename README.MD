@@ -5,9 +5,8 @@
 - :tv:[Video 1](https://www.youtube.com/watch?v=9wri8Cr78Lo&feature=youtu.be)
 - :tv:[Video 2](https://www.youtube.com/watch?v=Dt8aBi2poVQ&feature=youtu.be)
 
-![](./IMG/plantoid1.jpg) | ![](./IMG/plantoid1.jpg) | 
---- | --- | ---
-|
+|![](./IMG/plantoid1.jpg) | ![](./IMG/plantoid1.jpg) | 
+--- | --- | 
 
 # HELLOBOT
 
