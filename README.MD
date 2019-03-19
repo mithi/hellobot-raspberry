@@ -5,7 +5,7 @@
 - Ringo
 
 # Other Related Projects 
-- [Nine Electronics Maker Projects Including a Robot Arm and Automated Xylophone](https://github.com/mithi/old-maker-toys)
+- [Nine Electronics Maker Projects Including a Robot Arm and Automated Xylophone](https://github.com/mithi/creative-tech-prototypes)
 - [Dancing Hexapod](https://github.com/mithi/hexy)
 - [Some Udacity Projects](https://github.com/mithi/some-udacity-projects)
 - [Arduino BootCamp](https://github.com/mithi/arduino-basic)
