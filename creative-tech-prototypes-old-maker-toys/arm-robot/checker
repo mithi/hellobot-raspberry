@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+black .
+python -m py_compile ./*.py ./*/*.py ./*/*/*.py
+flake8 ./*.py ./*/*.py ./*/*/*.py
+pylint ./*.py ./*/*.py ./*/*/*.py --reports=y --ignore=activate_this.py --disable=broad-except,invalid-name,too-many-arguments,bad-continuation,too-many-locals,missing-class-docstring,missing-module-docstring,missing-function-docstring,duplicate-code

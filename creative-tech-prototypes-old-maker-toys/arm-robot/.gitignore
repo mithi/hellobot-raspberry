@@ -1,0 +1,7 @@
+.DS_Store
+**/__pycache__
+venv
+.env
+*.pyc
+.vscode/settings.json
+.pylintrc
