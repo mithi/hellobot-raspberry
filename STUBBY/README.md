@@ -33,4 +33,4 @@ Stubby's physical frame has been modified by Daniel Slattness to use standard-si
 - 18x Servos (Towerpro MG995)
 - - https://towerpro.com.tw/product/mg995/
 
-![plantoid WIP](https://github.com/mithi/stubby/blob/master/wip_plantoid.jpg)
+![plantoid WIP](./wip_plantoid.jpg)
