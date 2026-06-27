@@ -10,7 +10,7 @@ signals from the plant's leaves.
 Here is Daniel Stattnes's personal website:
 - http://slaattnes.com/
 
-![plantoid](https://github.com/mithi/stubby/blob/master/plantoid.jpg)
+![plantoid](./plantoid.jpg)
 
 
 ### The scripts make use of the following open-source libraries:
