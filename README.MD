@@ -11,7 +11,7 @@
 - [Arduino BootCamp](https://github.com/mithi/arduino-basic)
 
 # STUBBY and Quadrupdeds
-- Scripts for visual artist Daniel Slattnes. The movements done by the hexapod robot is supposedly based on the signals from the mounted plant's leaves.
+- Scripts for visual artist Daniel Slattnes. The movements done by the hexapod and quadruped robots is  based on the signals from the mounted plant's leaves.
 - :tv:[Video 1](https://www.youtube.com/watch?v=9wri8Cr78Lo&feature=youtu.be)
 - :tv:[Video 2](https://www.youtube.com/watch?v=Dt8aBi2poVQ&feature=youtu.be)
 - [(Quadrupeds) Plant Cyborgs Page](https://staging-my-site-ef3c79fe.ploy.build/plant-cyborgs)
@@ -25,8 +25,9 @@
 - [Stubby Modification](https://gist.github.com/mithi/c13616713f3c93c353b61a5991625ec2)
 
 
-|![](./IMG/plantoid1.jpg) | ![](./IMG/plantoid1.jpg) | 
+|![](./IMG/plantoid1.jpg) | ![](./IMG/quadruped-1.png) | 
 --- | --- | 
+
 
 # HELLOBOT
 
