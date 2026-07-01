@@ -9,6 +9,10 @@
 - [Dancing Hexapod](https://github.com/mithi/hexy)
 - [Some Udacity Projects](https://github.com/mithi/some-udacity-projects)
 - [Arduino BootCamp](https://github.com/mithi/arduino-basic)
+- [wordpress-archive](./wordpress-archive) An archive of old series of posts on Wordpress:
+  - Hexapod Robots
+  - Lego Technic 4x4 Crawler
+  - Maya Robot toy project
 
 # STUBBY and Quadrupdeds
 - Scripts for visual artist Daniel Slattnes. The movements done by the hexapod and quadruped robots is  based on the signals from the mounted plant's leaves.
