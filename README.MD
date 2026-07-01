@@ -46,7 +46,7 @@
 
 # RINGO
 - Alternative OOP style Library for Plumgeek's Ringo Robot
-- [PLUMGEEK](http://www.plumgeek.com/)
+- [PLUMGEEK](https://www.kickstarter.com/projects/plumgeek/ringo-the-palm-size-robot-with-real-personality/creator)
 
 ![](./IMG/ringoIMG1.png) | ![](./IMG/ringoIMG2.png) | ![](./IMG/ringoIMG3.png)
 --- | --- | ---
